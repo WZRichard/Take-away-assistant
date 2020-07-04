@@ -1,11 +1,13 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/7/4 10:19:03                            */
+/* Created on:     2020/7/4 14:33:52                            */
 /*==============================================================*/
 
 SET FOREIGN_KEY_CHECKS = 0;
 
 drop table if exists Administrator;
+
+drop table if exists Belong_to;
 
 drop table if exists Collect_to_get;
 
@@ -44,6 +46,16 @@ create table Administrator
    Administrator_pwd    char(15) not null,
    Administrator_id     int not null,
    primary key (Administrator_id)
+);
+
+/*==============================================================*/
+/* Table: Belong_to                                             */
+/*==============================================================*/
+create table Belong_to
+(
+   Merchandise_id       int not null,
+   Merchant_id          int not null,
+   primary key (Merchandise_id, Merchant_id)
 );
 
 /*==============================================================*/
@@ -180,6 +192,7 @@ create table Merchant_information
    Merchant_level       int not null,
    Consume_avgprice     float,
    Total_sales          int,
+   Merchant_pwd         char(20),
    primary key (Merchant_id)
 );
 
@@ -229,8 +242,15 @@ create table Rider_information
    Rider_name           char(10) not null,
    Entry_date           date not null,
    Rider_sort           char(15) not null,
+   Rider_pwd            char(20) not null,
    primary key (Rider_id)
 );
+
+alter table Belong_to add constraint FK_Belong_to foreign key (Merchandise_id)
+      references Merchandise_information (Merchandise_id) on delete restrict on update restrict;
+
+alter table Belong_to add constraint FK_Belong_to2 foreign key (Merchant_id)
+      references Merchant_information (Merchant_id) on delete restrict on update restrict;
 
 alter table Collect_to_get add constraint FK_Collect_to_get foreign key (Consumer_id)
       references Consumer_information (Consumer_id) on delete restrict on update restrict;
