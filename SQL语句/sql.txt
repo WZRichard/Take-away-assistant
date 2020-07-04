@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/7/4 8:23:49                             */
+/* Created on:     2020/7/4 10:19:03                            */
 /*==============================================================*/
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -99,6 +99,7 @@ create table Delivery_address
 (
    Address_id           int not null,
    Order_id             int,
+   Consumer_id          int,
    Address_province     char(15),
    Address_city         char(15),
    Address_region       char(15),
@@ -114,7 +115,7 @@ create table Delivery_address
 create table Discount_coupon
 (
    Coupon_id            int not null,
-   Discount_amount      float not null,
+   Discount_price       float not null,
    Order_count          int not null,
    Starttime            date not null,
    Finishtime           date not null,
@@ -189,11 +190,12 @@ create table Order_
 (
    Order_id             int not null,
    Merchant_id          int,
+   Address_id           int,
    Merchandise_id       int,
-   Address_id           int not null,
+   Rider_id             int not null,
    Consumer_id          int,
    Reduction_id         int,
-   Rider_id             int,
+   Rid_Rider_id         int,
    Coupon_id            int,
    Order_orgamount      float not null,
    Order_setamount      float not null,
@@ -201,7 +203,7 @@ create table Order_
    Order_deltime        date not null,
    Order_state          char(10) not null,
    Income_Date          date not null,
-   Income_comment       char(20) not null,
+   Consumer_comment     char(20) not null,
    primary key (Order_id)
 );
 
@@ -248,8 +250,11 @@ alter table Comment add constraint FK_Comment2 foreign key (Merchandise_id)
 alter table Comment add constraint FK_Comment3 foreign key (Consumer_id)
       references Consumer_information (Consumer_id) on delete restrict on update restrict;
 
-alter table Delivery_address add constraint FK_Address foreign key (Order_id)
+alter table Delivery_address add constraint FK_Address2 foreign key (Order_id)
       references Order_ (Order_id) on delete restrict on update restrict;
+
+alter table Delivery_address add constraint FK_localtion foreign key (Consumer_id)
+      references Consumer_information (Consumer_id) on delete restrict on update restrict;
 
 alter table Having_Discount add constraint FK_Having_Discount foreign key (Consumer_id)
       references Consumer_information (Consumer_id) on delete restrict on update restrict;
@@ -263,17 +268,20 @@ alter table Having_Discount add constraint FK_Having_Discount3 foreign key (Merc
 alter table Merchandise_information add constraint FK_Detail foreign key (Sort_id)
       references Merchandise_sort (Sort_id) on delete restrict on update restrict;
 
+alter table Order_ add constraint FK_Address foreign key (Address_id)
+      references Delivery_address (Address_id) on delete restrict on update restrict;
+
 alter table Order_ add constraint FK_Consumer foreign key (Consumer_id)
       references Consumer_information (Consumer_id) on delete restrict on update restrict;
 
 alter table Order_ add constraint FK_Discount foreign key (Coupon_id)
       references Discount_coupon (Coupon_id) on delete restrict on update restrict;
 
-alter table Order_ add constraint FK_Full_reduction foreign key (Reduction_id)
+alter table Order_ add constraint "FK_Full reduction" foreign key (Reduction_id)
       references Full_reduction (Reduction_id) on delete restrict on update restrict;
 
-alter table Order_ add constraint FK_Income foreign key (Address_id)
-      references Delivery_address (Address_id) on delete restrict on update restrict;
+alter table Order_ add constraint FK_Income foreign key (Rider_id)
+      references Rider_information (Rider_id) on delete restrict on update restrict;
 
 alter table Order_ add constraint FK_Merchandise foreign key (Merchandise_id)
       references Merchandise_information (Merchandise_id) on delete restrict on update restrict;
@@ -281,7 +289,7 @@ alter table Order_ add constraint FK_Merchandise foreign key (Merchandise_id)
 alter table Order_ add constraint FK_Merchant foreign key (Merchant_id)
       references Merchant_information (Merchant_id) on delete restrict on update restrict;
 
-alter table Order_ add constraint FK_Rider foreign key (Rider_id)
+alter table Order_ add constraint FK_Rider foreign key (Rid_Rider_id)
       references Rider_information (Rider_id) on delete restrict on update restrict;
 
 alter table Order_Detail add constraint FK_Order_Detail foreign key (Order_id)
