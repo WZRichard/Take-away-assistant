@@ -23,7 +23,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../OneDrive - stu.zucc.edu.cn/Sophomore Second/暑期短学期/SummerCs" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -89,6 +89,7 @@
       <updated>1593823149054</updated>
       <workItem from="1593823151824" duration="9147000" />
       <workItem from="1593841207928" duration="3721000" />
+      <workItem from="1593928684582" duration="498000" />
     </task>
     <servers />
   </component>
