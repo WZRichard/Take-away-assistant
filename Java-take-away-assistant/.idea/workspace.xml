@@ -8,6 +8,50 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Take-away Project" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Take-away Project" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Take-away Project" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="take-away assistant: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Take-away Project" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="take-away assistant: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Take-away Project" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="take-away assistant: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="views" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -21,15 +65,22 @@
   <component name="ProjectId" id="1eCQZSFxEORKpNJoNxRYoNw9mmw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../OneDrive - stu.zucc.edu.cn/Sophomore Second/暑期短学期/SummerCs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../OneDrive - stu.zucc.edu.cn/Sophomore Second/数据库原理/booklib" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Documents\Git-Data\project-WZRichard\Java-take-away-assistant\src" />
+      <recent name="D:\Documents\Git-Data\project-WZRichard\Java-take-away-assistant\src\ui" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -44,6 +95,13 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.FrmMainLogin">
+    <configuration name="FileChoorserStudy" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FileChoorserStudy" />
+      <module name="Java-take-away-assistant" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FrmMainLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.FrmMainLogin" />
       <module name="Java-take-away-assistant" />
@@ -57,15 +115,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.test" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Java-take-away-assistant" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TableViewSample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TableViewSample" />
+      <module name="Java-take-away-assistant" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test" />
+      <module name="Java-take-away-assistant" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -73,7 +139,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.FrmMainLogin" />
-        <item itemvalue="Application.test" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.TableViewSample" />
+        <item itemvalue="Application.FileChoorserStudy" />
+        <item itemvalue="Application.test (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -89,7 +158,35 @@
       <updated>1593823149054</updated>
       <workItem from="1593823151824" duration="9147000" />
       <workItem from="1593841207928" duration="3721000" />
-      <workItem from="1593928684582" duration="498000" />
+      <workItem from="1593928684582" duration="1507000" />
+      <workItem from="1593932457046" duration="11223000" />
+      <workItem from="1593993879280" duration="20388000" />
+      <workItem from="1594025155799" duration="1198000" />
+      <workItem from="1594080309892" duration="18062000" />
+      <workItem from="1594107992936" duration="2800000" />
+      <workItem from="1594174106516" duration="7254000" />
+      <workItem from="1594200825957" duration="12891000" />
+      <workItem from="1594220811818" duration="1944000" />
+      <workItem from="1594253208055" duration="19802000" />
+      <workItem from="1594279844465" duration="2404000" />
+      <workItem from="1594288364730" duration="1459000" />
+      <workItem from="1594302893712" duration="4357000" />
+      <workItem from="1594339537306" duration="3463000" />
+      <workItem from="1594343033646" duration="26841000" />
+      <workItem from="1594425871677" duration="31314000" />
+      <workItem from="1594512074279" duration="13205000" />
+      <workItem from="1594528542652" duration="376000" />
+      <workItem from="1594532168705" duration="9622000" />
+      <workItem from="1594543298226" duration="6650000" />
+      <workItem from="1594566885430" duration="3450000" />
+      <workItem from="1594598903573" duration="19892000" />
+      <workItem from="1594639377843" duration="5155000" />
+      <workItem from="1594654968299" duration="632000" />
+      <workItem from="1594655669426" duration="1555000" />
+      <workItem from="1594685173054" duration="6944000" />
+      <workItem from="1594698984260" duration="64000" />
+      <workItem from="1594699914018" duration="170000" />
+      <workItem from="1594979550927" duration="101000" />
     </task>
     <servers />
   </component>

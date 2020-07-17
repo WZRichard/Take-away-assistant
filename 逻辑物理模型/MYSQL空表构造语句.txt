@@ -1,0 +1,465 @@
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2020/7/8 23:53:00                            */
+/*==============================================================*/
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+drop table if exists Administrator;
+
+drop table if exists Collect_to_get;
+
+drop table if exists Comment_;
+
+drop table if exists Consumer_information;
+
+drop table if exists Delivery_address;
+
+drop table if exists Discount_coupon;
+
+drop table if exists Full_reduction;
+
+drop table if exists Merchandise_information;
+
+drop table if exists Merchandise_sort;
+
+drop table if exists Merchant_information;
+
+drop table if exists Order_;
+
+drop table if exists Order_Detail;
+
+drop table if exists Rider_information;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+/*==============================================================*/
+/* Table: Administrator                                         */
+/*==============================================================*/
+create table Administrator
+(
+   Administrator_name   char(15) not null,
+   Administrator_pwd    char(15) not null,
+   Administrator_id     int not null auto_increment,
+   primary key (Administrator_id)
+);
+
+/*==============================================================*/
+/* Table: Collect_to_get                                        */
+/*==============================================================*/
+create table Collect_to_get
+(
+   Consumer_id          int not null,
+   Coupon_id            int not null,
+   Merchant_id          int not null,
+   Collect_now          int not null,
+   primary key (Consumer_id, Coupon_id, Merchant_id)
+);
+
+/*==============================================================*/
+/* Table: Comment                                               */
+/*==============================================================*/
+create table Comment_
+(
+   Merchandise_id       int not null,
+   Consumer_id          int not null,
+	 Order_id             int not null,
+   Comment_content      char(50) not null,
+   Comment_Date         datetime not null,
+   Comment_level        int not null,
+   Comment_picture      longblob not null,
+   primary key (Merchandise_id, Consumer_id)
+);
+
+/*==============================================================*/
+/* Table: Consumer_information                                  */
+/*==============================================================*/
+create table Consumer_information
+(
+   Consumer_id          int not null auto_increment,
+   Consumer_name        national char(10) not null,
+   Consumer_gender      char(3),
+   Consumer_pwd         char(20) not null,
+   Consumer_phonenum    char(11),
+   Consumer_mail        char(20),
+   Consumer_city        char(20),
+   Consumer_regdate     datetime not null,
+   Consumer_member      bool not null,
+   Consumer_memberddl   datetime,
+   primary key (Consumer_id)
+);
+
+/*==============================================================*/
+/* Table: Delivery_address                                      */
+/*==============================================================*/
+create table Delivery_address
+(
+   Address_id           int not null auto_increment,
+   Consumer_id          int,
+   Address_province     char(15),
+   Address_city         char(15),
+   Address_region       char(15),
+   Address_add          char(20) not null,
+   Address_linkman      char(10) not null,
+   Address_phonenum     char(11) not null,
+	 Default_             bool not null default false,
+   primary key (Address_id)
+);
+
+/*==============================================================*/
+/* Table: Discount_coupon                                       */
+/*==============================================================*/
+create table Discount_coupon
+(
+   Coupon_id            int not null auto_increment,
+   Merchant_id          int,
+   Discount_price       float not null,
+   Order_count          int not null,
+   Starttime            datetime not null,
+   Finishtime           datetime not null,
+   primary key (Coupon_id)
+);
+
+/*==============================================================*/
+/* Table: Full_reduction                                        */
+/*==============================================================*/
+create table Full_reduction
+(
+   Reduction_id         int not null auto_increment,
+   Merchant_id          int,
+   Red_Amount           float not null,
+   Red_Aim              float not null,
+   Support_coupon       bool not null,
+   primary key (Reduction_id)
+);
+
+/*==============================================================*/
+/* Table: Having_Discount                                       */
+/*==============================================================
+create table Having_Discount
+(
+   Consumer_id          int not null,
+   Coupon_id            int not null,
+   Merchant_id          int not null,
+   Having_count         int not null,
+   primary key (Consumer_id, Coupon_id, Merchant_id)
+);*/
+
+/*==============================================================*/
+/* Table: Merchandise_information                               */
+/*==============================================================*/
+create table Merchandise_information
+(
+   Merchandise_id       int not null auto_increment,
+   Sort_id              int,
+   Merchant_id          int,
+   Merchandise_name     char(15) not null,
+   Merchandise_price    float not null,
+   Disconut_price       float,
+   primary key (Merchandise_id)
+);
+
+/*==============================================================*/
+/* Table: Merchandise_sort                                      */
+/*==============================================================*/
+create table Merchandise_sort
+(
+   Sort_id              int not null auto_increment,
+   Sort_name            char(15) not null,
+   primary key (Sort_id)
+);
+
+/*==============================================================*/
+/* Table: Merchant_information                                  */
+/*==============================================================*/
+create table Merchant_information
+(
+   Merchant_id          int not null auto_increment,
+   Merchant_name        char(15) not null,
+   Merchant_level       int,
+   Consume_avgprice     float,
+   Total_sales          int,
+   Merchant_pwd         char(20) not null,
+   primary key (Merchant_id)
+);
+
+/*==============================================================*/
+/* Table: Order_                                                */
+/*==============================================================*/
+create table Order_
+(
+   Order_id             int not null auto_increment,
+   Address_id           int,
+   Rider_id             int,
+   Consumer_id          int,
+   Reduction_id         int,
+   Coupon_id            int,
+   Order_orgamount      float not null,
+   Order_setamount      float not null,
+   Order_platime        datetime not null,
+   Order_deltime        datetime not null,
+   Order_state          char(10) not null,
+   Comment_Rider        char(20),
+   primary key (Order_id)
+);
+
+/*==============================================================*/
+/* Table: Order_Detail                                          */
+/*==============================================================*/
+create table Order_Detail
+(
+   Order_id             int not null,
+   Merchandise_id       int not null,
+   Merchandise_Count    int not null,
+   primary key (Order_id, Merchandise_id)
+);
+
+/*==============================================================*/
+/* Table: Rider_information                                     */
+/*==============================================================*/
+create table Rider_information
+(
+   Rider_id             int not null auto_increment,
+   Rider_name           char(10) not null,
+   Reg_date             datetime not null,
+   Rider_sort           char(15) not null,
+   Rider_pwd            char(20) not null,
+   primary key (Rider_id)
+);
+
+drop view if exists view_order;
+
+/*==============================================================*/
+/* View: view_order                                             */
+/*==============================================================*/
+create view view_order as
+select order_.Order_id, consumer_information.Consumer_id, Consumer_name, merchant_information.Merchant_id, Merchant_name, Merchandise_name, Merchandise_Count, Order_state, Order_platime, Order_deltime, Address_province, Address_city, Address_region, Address_add, Address_linkman, Address_phonenum, Comment_Rider, Rider_id
+from order_, order_detail, consumer_information, merchandise_information, delivery_address, merchant_information
+where order_.Consumer_id = consumer_information.Consumer_id 
+and order_.Order_id = order_detail.Order_id
+and order_detail.Merchandise_id = merchandise_information.Merchandise_id
+and merchant_information.Merchant_id = merchandise_information.Merchant_id
+and order_.Address_id = delivery_address.Address_id;
+
+drop view if exists view_takeorder;
+
+/*==============================================================*/
+/* View: view_takeorder                                         */
+/*==============================================================*/
+create view view_takeorder as 
+select merchant_information.merchant_id, merchant_name, Merchant_level,Consume_avgprice, Total_sales, merchandise_id, merchandise_name, Merchandise_price, Disconut_price, Sort_name
+from merchant_information, merchandise_information, merchandise_sort
+where merchant_information.Merchant_id = merchandise_information.Merchant_id
+and merchandise_information.Sort_id = merchandise_sort.Sort_id;
+
+drop view if exists view_allDiscount;
+
+/*==============================================================*/
+/* View: view_allDiscount                                       */
+/*==============================================================*/
+create view view_allDiscount as 
+select consumer_information.Consumer_id, merchant_information.Merchant_id, full_reduction.Reduction_id, discount_coupon.Coupon_id, Red_Amount, Red_Aim, Discount_price, Order_count
+from consumer_information, merchant_information, collect_to_get, full_reduction, discount_coupon
+where merchant_information.Merchant_id = full_reduction.Merchant_id
+and merchant_information.Merchant_id = collect_to_get.Merchant_id
+and collect_to_get.Consumer_id = consumer_information.Consumer_id
+and full_reduction.Support_coupon = true
+and collect_to_get.Coupon_id = discount_coupon.Coupon_id
+and Collect_now >= Order_count;
+
+drop view if exists view_havingCoupon;
+
+/*==============================================================*/
+/* View: view_havingCoupon                                      */
+/*==============================================================*/
+create view view_havingCoupon as 
+select collect_to_get.Consumer_id, Merchant_name, Discount_price, Order_count, Collect_now, Starttime, Finishtime
+from consumer_information, merchant_information, collect_to_get, discount_coupon
+where merchant_information.Merchant_id = collect_to_get.Merchant_id
+and collect_to_get.Consumer_id = consumer_information.Consumer_id
+and collect_to_get.Coupon_id = discount_coupon.Coupon_id
+and Finishtime >= (select NOW());
+
+drop view if exists view_setComment;
+
+/*==============================================================*/
+/* View: view_setComment                                             */
+/*==============================================================*/
+create view view_setComment as
+select Merchant_name, Merchandise_name, Order_platime, order_.Order_id, Consumer_id, merchandise_information.Merchandise_id, merchant_information.Merchant_id
+from order_, order_detail, merchandise_information, merchant_information
+where order_detail.Merchandise_id = merchandise_information.Merchandise_id
+and merchandise_information.Merchant_id = merchant_information.Merchant_id
+and order_detail.Order_id = order_.Order_id
+and order_.Order_state = '已送达'
+and not EXISTS 
+(SELECT * from comment_ where order_detail.Merchandise_id = comment_.Merchandise_id and order_detail.Order_id = comment_.Order_id);
+
+drop view if exists merchant_order;
+
+/*==============================================================*/
+/* View: merchant_order                                       */
+/*==============================================================*/
+CREATE VIEW `merchant_order` AS SELECT
+	order_.Order_id, 
+	merchant_information.Merchant_id, 
+	merchant_information.Total_sales, 
+	merchant_information.Consume_avgprice, 
+	merchant_information.Merchant_name,
+	merchandise_information.Merchandise_id,
+	merchandise_information.Merchandise_name,
+	merchandise_information.Merchandise_price
+FROM
+	order_
+	INNER JOIN
+	order_detail
+	ON 
+		order_.Order_id = order_detail.Order_id
+	INNER JOIN
+	merchandise_information
+	ON 
+		order_detail.Merchandise_id = merchandise_information.Merchandise_id
+	INNER JOIN
+	merchant_information
+	ON 
+		merchant_information.Merchant_id = merchandise_information.Merchant_id;
+		
+drop view if exists view_recommend;
+
+/*==============================================================*/
+/* View: view_recommend                                      */
+/*==============================================================*/
+CREATE VIEW `view_recommend` AS 
+SELECT
+	merchandise_sort.Sort_name, 
+	consumer_information.Consumer_id, 
+	order_.Order_id, 
+	merchandise_information.Merchandise_name, 
+	merchandise_information.Merchandise_price, 
+	merchandise_information.Disconut_price, 
+	merchandise_information.Merchandise_id, 
+	merchandise_information.Merchant_id,
+	merchandise_sort.Sort_id
+FROM
+	order_detail
+	INNER JOIN
+	order_
+	ON 
+		order_detail.Order_id = order_.Order_id
+	INNER JOIN
+	consumer_information
+	ON 
+		order_.Consumer_id = consumer_information.Consumer_id
+	INNER JOIN
+	merchandise_information
+	ON 
+		order_detail.Merchandise_id = merchandise_information.Merchandise_id
+	INNER JOIN
+	merchandise_sort
+	ON 
+		merchandise_information.Sort_id = merchandise_sort.Sort_id;
+	
+drop view if exists view_loadrecommend;
+
+/*==============================================================*/
+/* View: view_recommend                                      */
+/*==============================================================*/
+CREATE VIEW `view_loadrecommend` AS SELECT
+	comment_.Comment_picture, 
+	comment_.Comment_level, 
+	comment_.Comment_content, 
+	comment_.Comment_Date, 
+	comment_.Order_id, 
+	merchant_information.Merchant_name, 
+	merchandise_information.Merchandise_name,
+	merchandise_information.Merchant_id,
+	consumer_information.Consumer_name
+FROM
+	merchant_information
+	INNER JOIN
+	merchandise_information
+	ON 
+		merchant_information.Merchant_id = merchandise_information.Merchant_id
+	INNER JOIN
+	order_detail
+	ON 
+		merchandise_information.Merchandise_id = order_detail.Merchandise_id
+	INNER JOIN
+	order_
+	ON 
+		order_.Order_id = order_detail.Order_id
+	INNER JOIN
+	comment_
+	ON 
+		merchandise_information.Merchandise_id = comment_.Merchandise_id AND
+		order_.Order_id = comment_.Order_id
+	INNER JOIN
+	consumer_information
+	ON 
+		comment_.Consumer_id = consumer_information.Consumer_id AND
+		order_.Consumer_id = consumer_information.Consumer_id;
+
+
+alter table Collect_to_get add constraint FK_Collect_to_get foreign key (Consumer_id)
+      references Consumer_information (Consumer_id) on delete restrict on update restrict;
+
+alter table Collect_to_get add constraint FK_Collect_to_get2 foreign key (Coupon_id)
+      references Discount_coupon (Coupon_id) on delete restrict on update restrict;
+
+alter table Collect_to_get add constraint FK_Collect_to_get3 foreign key (Merchant_id)
+      references Merchant_information (Merchant_id) on delete restrict on update restrict;
+
+alter table Comment_ add constraint FK_Comment foreign key (Merchandise_id)
+      references Merchandise_information (Merchandise_id) on delete restrict on update restrict;
+
+alter table Comment_ add constraint FK_Comment2 foreign key (Consumer_id)
+      references Consumer_information (Consumer_id) on delete restrict on update restrict;
+			
+alter table Comment_ add constraint FK_Comment3 foreign key (Order_id)
+      references Order_ (Order_id) on delete restrict on update restrict;
+
+alter table Delivery_address add constraint FK_localtion foreign key (Consumer_id)
+      references Consumer_information (Consumer_id) on delete restrict on update restrict;
+
+alter table Discount_coupon add constraint FK_belong22 foreign key (Merchant_id)
+      references Merchant_information (Merchant_id) on delete restrict on update restrict;
+
+alter table Full_reduction add constraint FK_belong11 foreign key (Merchant_id)
+      references Merchant_information (Merchant_id) on delete restrict on update restrict;
+
+-- alter table Having_Discount add constraint FK_Having_Discount foreign key (Consumer_id)
+--       references Consumer_information (Consumer_id) on delete restrict on update restrict;
+-- 
+-- alter table Having_Discount add constraint FK_Having_Discount2 foreign key (Coupon_id)
+--       references Discount_coupon (Coupon_id) on delete restrict on update restrict;
+-- 
+-- alter table Having_Discount add constraint FK_Having_Discount3 foreign key (Merchant_id)
+--       references Merchant_information (Merchant_id) on delete restrict on update restrict;
+
+alter table Merchandise_information add constraint FK_Belong_to_ foreign key (Merchant_id)
+      references Merchant_information (Merchant_id) on delete restrict on update restrict;
+
+alter table Merchandise_information add constraint FK_Detail foreign key (Sort_id)
+      references Merchandise_sort (Sort_id) on delete restrict on update restrict;
+
+alter table Order_ add constraint FK_Address foreign key (Address_id)
+      references Delivery_address (Address_id) on delete restrict on update restrict;
+
+alter table Order_ add constraint FK_Consumer foreign key (Consumer_id)
+      references Consumer_information (Consumer_id) on delete restrict on update restrict;
+
+alter table Order_ add constraint FK_Discount foreign key (Coupon_id)
+      references Discount_coupon (Coupon_id) on delete restrict on update restrict;
+
+alter table Order_ add constraint FK_Full_reduction foreign key (Reduction_id)
+      references Full_reduction (Reduction_id) on delete restrict on update restrict;
+
+alter table Order_ add constraint FK_getorder foreign key (Rider_id)
+      references Rider_information (Rider_id) on delete restrict on update restrict;
+
+alter table Order_Detail add constraint FK_Order_Detail foreign key (Order_id)
+      references Order_ (Order_id) on delete restrict on update restrict;
+
+alter table Order_Detail add constraint FK_Order_Detail2 foreign key (Merchandise_id)
+      references Merchandise_information (Merchandise_id) on delete restrict on update restrict;
+

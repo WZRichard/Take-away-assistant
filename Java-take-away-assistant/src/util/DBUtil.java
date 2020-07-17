@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DBUtil {
-    private static final String jdbcUrl = "jdbc:mysql://localhost:3306/SummerCs";
+    private static final String jdbcUrl = "jdbc:mysql://localhost:3306/Take-away assistant";
     private static final String dbUser = "root";
     private static final String dbPwd = "root";
     private static ComboPooledDataSource ds = null;
